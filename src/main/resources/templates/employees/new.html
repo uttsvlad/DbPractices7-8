@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New employee</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/employees/create}" th:object="${employeeUserDTO}">
+    <label for="fullName">ФИО: </label>
+    <input type="text" th:field="*{fullName}" id="fullName"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Full name error</h3>
+    <br/>
+    <label for="passportSerialNumber">Серия и номер паспорта: </label>
+    <input type="text" th:field="*{passportSerialNumber}" id="passportSerialNumber"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('passportSerialNumber')}" th:errors="*{passportSerialNumber}">
+        Passport error</h3>
+    <br/>
+    <label for="email">Email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</h3>
+    <br/>
+    <label for="phoneNumber">Номер телефона: </label>
+    <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone error</h3>
+    <br/>
+    <label for="position">Должность: </label>
+    <select th:field="*{positionName}" id="position">
+        <option value="Clerk">Клерк</option>
+        <option value="Manager">Менеджер</option>
+    </select>
+    <br>
+    <br>
+    <label for="username">Логин: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</h3>
+    <br/>
+    <label for="password">Пароль: </label>
+    <input type="password" th:field="*{password}" id="password"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</h3>
+    <br/>
+    <input type="submit" value="Добавить!"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Подготовка статистики</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/manager/saveTasksStatistic}" th:object="${statisticDTO}">
+    <label for="employeeId">Сотрудник: </label>
+    <select th:field="*{employeeId}" id="employeeId">
+        <option th:each="employee : ${employees}" th:value="${employee.getEmployeeId()}"
+                th:text="${employee.getFullName()}">Full name
+        </option>
+    </select>
+    <br>
+    <label for="startDate">Дата от: </label>
+    <input type="date" th:field="*{startDate}" id="startDate"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">
+        Date error</h3>
+    <br/>
+    <label for="endDate">Дата до: </label>
+    <input type="date" th:field="*{endDate}" id="endDate"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">
+        Date error</h3>
+    <br>
+    <input type="submit" value="Скчать csv со статистикой"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать задачу</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/manager/createTask}" th:object="${taskDTO}">
+    <label for="description">Описание: </label>
+    <textarea th:field="*{description}"  id="description"></textarea>
+    <h3 style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</h3>
+    <br/>
+    <label for="deadlineDate">Дедлайн: </label>
+    <input type="date" th:field="*{deadlineDate}" id="deadlineDate"/>
+    <h3 style="color:red" th:if="${#fields.hasErrors('deadlineDate')}" th:errors="*{deadlineDate}">
+        Deadline error</h3>
+    <br/>
+    <label for="priorityId">Приоритет: </label>
+    <select th:field="*{priorityId}" id="priorityId">
+        <option value="1">LOW</option>
+        <option value="2">MEDIUM</option>
+        <option value="3">HIGH</option>
+    </select>
+    <br>
+    <label for="contactPersonId">Контактное лицо: </label>
+    <select  th:field="*{contactPersonId}" id="contactPersonId">
+        <option th:each="contactPerson : ${contactPersons}" th:value="${contactPerson.getContactPersonId()}" th:text="${contactPerson.getFullName()}">Full name</option>
+    </select>
+    <br>
+    <label for="executorId">Кому назначить? </label>
+    <select  th:field="*{executorId}" id="executorId">
+        <option th:each="employee : ${employees}" th:value="${employee.getEmployeeId()}" th:text="${employee.getFullName()}">Full name</option>
+    </select>
+    <br>
+    <label for="contractId">Контракт: </label>
+    <select  th:field="*{contractId}" id="contractId">
+        <option th:each="contract : ${contracts}" th:value="${contract.getContractId()}" th:text="${contract.getDescription()}">Description</option>
+    </select>
+    <br>
+    <input type="submit" value="Добавить!"/>
+</form>
+
+</body>
+</html>

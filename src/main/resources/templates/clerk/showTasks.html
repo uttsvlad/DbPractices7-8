@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои задачи</title>
+</head>
+<body>
+<div th:each="task : ${tasks}">
+    <a th:href="@{/clerk/showTask/{id}(id=${task.getTaskId()})}"
+       th:text="${task.getDescription() + ', дедлайн: ' + task.getDeadlineDate()}">task</a>
+</div>
+</body>
+</html>

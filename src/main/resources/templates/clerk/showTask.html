@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Задача</title>
+</head>
+<body>
+<p th:text="${'Описание: '+ task.getDescription()}">DESCRIPTION</p>
+<p th:text="${'Дата создания: '+ task.getCreationDate()}">CREATION DATE</p>
+<p th:text="${'Дедлайн: '+ task.getDeadlineDate()}">DEADLINE</p>
+<p th:if="${task.getCompleteDate()!=null}" th:text="${'Дата выполнения: '+ task.getCompleteDate()}">COMPLETE DATE</p>
+<p th:text="${'Приоритет: '+ task.getPriority().getPriorityName()}">PRIORITY</p>
+<p th:text="${'Статус: '+ task.getStatus().getStatusName()}">STATUS</p>
+<p th:text="${'Контактное лицо: '+ task.getContactPerson().getFullName()}">CONTACT PERSON</p>
+<p th:text="${'Автор: '+ task.getAuthor().getFullName()}">AUTHOR</p>
+<p th:text="${'Исполнитель: '+ task.getExecutor().getFullName()}">EXECUTOR</p>
+<a th:href="@{/clerk/taskDone/{id}(id=${task.getTaskId()})}">
+    <button th:if="${task.getCompleteDate()==null && task.getExecutor().getEmployeeId()==employee.getEmployeeId()}">
+        Выполнить!
+    </button>
+</a>
+<br>
+<a th:href="@{/manager/updateTask/{id}(id=${task.getTaskId()})}">
+    <button th:if=" ${employee.getPosition().getPositionName().equals('Manager') && task.getCompleteDate()==null}">
+        Редактировать!
+    </button>
+</a>
+
+</body>
+</html>
